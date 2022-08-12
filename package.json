@@ -6,14 +6,18 @@
     "node": ">= 16.13 <17"
   },
   "scripts": {
-    "start": "tsc -p tsconfig.release.json && node build/src/main.js",
+    "start_old": "tsc -p tsconfig.release.json && node build/src/main.js",
     "clean": "rimraf coverage build tmp",
     "prebuild": "npm run lint",
     "build": "tsc -p tsconfig.release.json",
     "build:watch": "tsc -w -p tsconfig.release.json",
     "lint": "eslint . --ext .ts,.tsx",
     "test": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "start": "DEV_CERTS='dev-certs' ./startOffline.sh",
+    "stop": "./stopOffline.sh",
+    "start:dev": "DEV_CERTS='dev-certs' sls offline start",
+    "test:api": "yarn start && newman run src/__test__/specs.json -e src/__test__/env.json && yarn stop"
   },
   "author": "Deepak Verma <deepak.verma@bilue.com.au>",
   "dependencies": {
@@ -26,6 +30,7 @@
     "tslib": "~2.3.1"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.102",
     "@types/jest": "~27.0.2",
     "@types/node": "~16.11.6",
     "@typescript-eslint/eslint-plugin": "~5.7.0",
@@ -35,6 +40,7 @@
     "eslint-config-prettier": "~8.3.0",
     "eslint-plugin-jest": "~25.3.0",
     "jest": "~27.4.4",
+    "newman": "^5.3.2",
     "nodemon": "^2.0.15",
     "prettier": "~2.5.1",
     "rimraf": "~3.0.2",

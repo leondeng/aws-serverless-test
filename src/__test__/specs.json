@@ -1,0 +1,339 @@
+{
+    "info": {
+        "_postman_id": "3bfbc3b7-3f74-4d4a-bc23-93781412af4c",
+        "name": "Weather",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "weather no parameter",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 400\", function () {",
+                            "    pm.response.to.have.status(400);",
+                            "});",
+                            "pm.test(\"auto complete no parameter\", function () {",
+                            "    var jsonData = pm.response.json();",
+                            "    pm.expect(jsonData.error).to.eql('Parameters postcode and country_code are required.');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "x-api-key",
+                        "value": "dev_api_key",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{API_BASE}}/weather",
+                    "host": ["{{API_BASE}}"],
+                    "path": ["weather"],
+                    "query": [
+                        {
+                            "key": "x-api-key",
+                            "value": "dev_api_key",
+                            "disabled": true
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "weather no country code",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 400\", function () {",
+                            "    pm.response.to.have.status(400);",
+                            "});",
+                            "pm.test(\"auto complete no parameter\", function () {",
+                            "    var jsonData = pm.response.json();",
+                            "    pm.expect(jsonData.error).to.eql('Parameters postcode and country_code are required.');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "x-api-key",
+                        "value": "dev_api_key",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{API_BASE}}/weather?postcode=2000",
+                    "host": ["{{API_BASE}}"],
+                    "path": ["weather"],
+                    "query": [
+                        {
+                            "key": "postcode",
+                            "value": "2000"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "weather no postcode",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 400\", function () {",
+                            "    pm.response.to.have.status(400);",
+                            "});",
+                            "pm.test(\"auto complete no parameter\", function () {",
+                            "    var jsonData = pm.response.json();",
+                            "    pm.expect(jsonData.error).to.eql('Parameters postcode and country_code are required.');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "x-api-key",
+                        "value": "dev_api_key",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{API_BASE}}/weather?country_code=au",
+                    "host": ["{{API_BASE}}"],
+                    "path": ["weather"],
+                    "query": [
+                        {
+                            "key": "country_code",
+                            "value": "au"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "weather invalid postcode",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 400\", function () {",
+                            "    pm.response.to.have.status(400);",
+                            "});",
+                            "pm.test(\"auto complete no parameter\", function () {",
+                            "    var jsonData = pm.response.json();",
+                            "    pm.expect(jsonData.error).to.eql('Parameter postcode is invalid.');",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "x-api-key",
+                        "value": "dev_api_key",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{API_BASE}}/weather?postcode=invalid&country_code=au",
+                    "host": ["{{API_BASE}}"],
+                    "path": ["weather"],
+                    "query": [
+                        {
+                            "key": "postcode",
+                            "value": "invalid"
+                        },
+                        {
+                            "key": "country_code",
+                            "value": "au"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "weather 2000 au",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 400\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "pm.test(\"auto complete no parameter\", function () {",
+                            "    var jsonData = pm.response.json();",
+                            "    pm.expect(jsonData.lon).to.eql(151.2025);",
+                            "    pm.expect(jsonData.lat).to.eql(-33.8699);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "x-api-key",
+                        "value": "dev_api_key",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{API_BASE}}/weather?postcode=2000&country_code=au",
+                    "host": ["{{API_BASE}}"],
+                    "path": ["weather"],
+                    "query": [
+                        {
+                            "key": "postcode",
+                            "value": "2000"
+                        },
+                        {
+                            "key": "country_code",
+                            "value": "au"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "weather 3000 au",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 400\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "pm.test(\"auto complete no parameter\", function () {",
+                            "    var jsonData = pm.response.json();",
+                            "    pm.expect(jsonData.lon).to.eql(144.9633);",
+                            "    pm.expect(jsonData.lat).to.eql(-37.814);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "x-api-key",
+                        "value": "dev_api_key",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{API_BASE}}/weather?postcode=3000&country_code=au",
+                    "host": ["{{API_BASE}}"],
+                    "path": ["weather"],
+                    "query": [
+                        {
+                            "key": "postcode",
+                            "value": "3000"
+                        },
+                        {
+                            "key": "country_code",
+                            "value": "au"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "weather 00501 us",
+            "event": [
+                {
+                    "listen": "test",
+                    "script": {
+                        "exec": [
+                            "pm.test(\"Status code is 400\", function () {",
+                            "    pm.response.to.have.status(200);",
+                            "});",
+                            "pm.test(\"auto complete no parameter\", function () {",
+                            "    var jsonData = pm.response.json();",
+                            "    pm.expect(jsonData.lon).to.eql(-73.0451);",
+                            "    pm.expect(jsonData.lat).to.eql(40.8154);",
+                            "});"
+                        ],
+                        "type": "text/javascript"
+                    }
+                }
+            ],
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "x-api-key",
+                        "value": "dev_api_key",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{API_BASE}}/weather?postcode=00501&country_code=us",
+                    "host": ["{{API_BASE}}"],
+                    "path": ["weather"],
+                    "query": [
+                        {
+                            "key": "postcode",
+                            "value": "00501"
+                        },
+                        {
+                            "key": "country_code",
+                            "value": "us"
+                        }
+                    ]
+                }
+            },
+            "response": []
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [""]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [""]
+            }
+        }
+    ]
+}
