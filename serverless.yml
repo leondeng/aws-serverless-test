@@ -26,6 +26,18 @@ custom:
     httpPort: 4000
     apiKey: ${env:API_KEY}
 
+# resources:
+#   Resources:
+#     GatewayResponse:
+#       Type: 'AWS::ApiGateway::GatewayResponse'
+#       Properties:
+#         ResponseParameters:
+#           gatewayresponse.header.WWW-Authenticate: "'Basic'"
+#         ResponseType: UNAUTHORIZED
+#         RestApiId:
+#           Ref: 'ApiGatewayRestApi'
+#         StatusCode: '401'
+
 functions:
   weatherApi:
     handler: src/handlers/weather.handler
@@ -36,3 +48,10 @@ functions:
           method: get
           cors: true # <-- CORS!
           private: true
+  #         authorizer:
+  #           name: authorizer
+  #           resultTtlInSeconds: 0
+  #           identitySource: method.request.header.Authorization
+  #           type: request
+  # authorizer:
+  #   handler: src/handlers/basicAuth.handler
